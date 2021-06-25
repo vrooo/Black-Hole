@@ -1,0 +1,17 @@
+﻿<Window x:Class="BlackHole.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:otk="clr-namespace:OpenTK;assembly=OpenTK.GLControl"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:BlackHole"
+        mc:Ignorable="d"
+        Title="BlackHole" Height="802" Width="1200" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <WindowsFormsHost>
+            <otk:GLControl x:Name="GLMain" Load="OnLoad" Paint="OnRender"
+                           MouseMove="OnMouseMove" MouseWheel="OnMouseScroll" MouseDown="OnMouseDown" MouseUp="OnMouseUp"/>
+        </WindowsFormsHost>
+    </Grid>
+</Window>
