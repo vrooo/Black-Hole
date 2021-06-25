@@ -42,6 +42,7 @@ namespace BlackHole
                      ClearBufferMask.DepthBufferBit);
             shader.BindMatrix(Camera.GetViewMatrix(), "viewMatrix");
             shader.BindMatrix(Camera.GetProjectionMatrix(width, height), "projMatrix");
+            shader.BindFloat((float)width / height, "aspectRatio");
         }
 
         public void UseCubeTest()

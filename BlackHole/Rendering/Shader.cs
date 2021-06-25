@@ -48,6 +48,12 @@ namespace BlackHole
             GL.Uniform1(location, obj);
         }
 
+        public void BindFloat(float obj, string name)
+        {
+            int location = GL.GetUniformLocation(program, name);
+            GL.Uniform1(location, obj);
+        }
+
         private int CompileShader(string path, ShaderType type)
         {
             string source;

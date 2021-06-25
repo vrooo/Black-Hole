@@ -6,10 +6,10 @@ namespace BlackHole
     {
         private Vector3[] _vertices =
         {
-            new Vector3(-1.0f, -1.0f, 0.0f),
-            new Vector3(+1.0f, -1.0f, 0.0f),
-            new Vector3(+1.0f, +1.0f, 0.0f),
-            new Vector3(-1.0f, +1.0f, 0.0f)
+            new Vector3(-1.0f, -1.0f, +1.0f),
+            new Vector3(+1.0f, -1.0f, +1.0f),
+            new Vector3(+1.0f, +1.0f, +1.0f),
+            new Vector3(-1.0f, +1.0f, +1.0f)
         };
         protected override Vector3[] vertices => _vertices;
 
