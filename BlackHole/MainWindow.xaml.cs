@@ -11,10 +11,10 @@ namespace BlackHole
     /// </summary>
     public partial class MainWindow : Window
     {
-        const float START_CAM_DIST = 10.0f;
-        const float MIN_CAM_DIST = 5.0f, MAX_CAM_DIST = 10000.0f;
+        const float START_CAM_DIST = 100.0f;
+        const float MIN_CAM_DIST = 5.0f, MAX_CAM_DIST = 1000000.0f;
         float camDist = START_CAM_DIST;
-        float M = 1;
+        float M = 10;
 
         RenderManager renderManager;
         Camera camera;

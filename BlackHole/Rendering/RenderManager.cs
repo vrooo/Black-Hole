@@ -41,6 +41,7 @@ namespace BlackHole
             GL.Clear(ClearBufferMask.ColorBufferBit |
                      ClearBufferMask.DepthBufferBit);
             shader.BindMatrix(Camera.GetViewMatrix(), "viewMatrix");
+            shader.BindMatrix(Camera.GetInvViewMatrix(), "invViewMatrix");
             //shader.BindMatrix(Camera.GetProjectionMatrix(width, height), "projMatrix");
             shader.BindFloat((float)width / height, "aspectRatio");
         }
