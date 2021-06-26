@@ -12,7 +12,9 @@ namespace BlackHole
     public partial class MainWindow : Window
     {
         const float START_CAM_DIST = 10.0f;
-        const float MIN_CAM_DIST = 5.0f, MAX_CAM_DIST = 100.0f;
+        const float MIN_CAM_DIST = 5.0f, MAX_CAM_DIST = 10000.0f;
+        float camDist = START_CAM_DIST;
+        float M = 1;
 
         RenderManager renderManager;
         Camera camera;
@@ -25,7 +27,7 @@ namespace BlackHole
 
         private void OnLoad(object sender, EventArgs e)
         {
-            camera = new OrbitCamera(0.0f, 0.0f, -START_CAM_DIST);
+            camera = new OrbitCamera(0.0f, 0.0f, -camDist);
             renderManager = new RenderManager(camera);
             quad = new Quad();
         }
@@ -37,6 +39,8 @@ namespace BlackHole
                 var control = sender as GLControl;
                 control.MakeCurrent();
                 renderManager.SetupRender(control.Width, control.Height);
+                renderManager.BindFloat(M, "M");
+                renderManager.BindFloat(camDist, "dist");
 
                 renderManager.Render(quad);
 
@@ -82,12 +86,12 @@ namespace BlackHole
 
         private void OnMouseScroll(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            float dist = -renderManager.Camera.Position.Z - e.Delta * camera.ZoomSpeed;
-            if (dist < MIN_CAM_DIST)
-                dist = MIN_CAM_DIST;
-            else if (dist > MAX_CAM_DIST)
-                dist = MAX_CAM_DIST;
-            renderManager.Camera.Position = new Vector3(0.0f, 0.0f, -dist);
+            camDist = -renderManager.Camera.Position.Z - e.Delta * camera.ZoomSpeed;
+            if (camDist < MIN_CAM_DIST)
+                camDist = MIN_CAM_DIST;
+            else if (camDist > MAX_CAM_DIST)
+                camDist = MAX_CAM_DIST;
+            renderManager.Camera.Position = new Vector3(0.0f, 0.0f, -camDist);
             Refresh();
         }
         #endregion

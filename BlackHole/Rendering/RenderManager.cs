@@ -41,7 +41,7 @@ namespace BlackHole
             GL.Clear(ClearBufferMask.ColorBufferBit |
                      ClearBufferMask.DepthBufferBit);
             shader.BindMatrix(Camera.GetViewMatrix(), "viewMatrix");
-            shader.BindMatrix(Camera.GetProjectionMatrix(width, height), "projMatrix");
+            //shader.BindMatrix(Camera.GetProjectionMatrix(width, height), "projMatrix");
             shader.BindFloat((float)width / height, "aspectRatio");
         }
 
@@ -53,7 +53,7 @@ namespace BlackHole
 
         public void Render(Transform transform)
         {
-            SetupTransform(transform.Color, transform.GetModelMatrix());
+            //SetupTransform(transform.Color, transform.GetModelMatrix());
             transform.Render();
         }
 
@@ -61,6 +61,16 @@ namespace BlackHole
         {
             shader.BindVector4(color, "color");
             shader.BindMatrix(model, "modelMatrix");
+        }
+
+        public void BindFloat(float obj, string name)
+        {
+            shader.BindFloat(obj, name);
+        }
+
+        public void BindInt(int obj, string name)
+        {
+            shader.BindInt(obj, name);
         }
     }
 }
