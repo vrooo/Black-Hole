@@ -7,11 +7,103 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:BlackHole"
         mc:Ignorable="d"
-        Title="BlackHole" Height="802" Width="1200" WindowStartupLocation="CenterScreen">
+        x:Name="_this" Title="Black hole" Height="802" Width="1200" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type GroupBox}">
+            <Setter Property="Margin" Value="0,1,0,0"/>
+        </Style>
+        <Style TargetType="{x:Type Slider}">
+            <Setter Property="Margin" Value="1,5,5,0"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="1,5,5,0"/>
+        </Style>
+        <Style TargetType="{x:Type xctk:DoubleUpDown}">
+            <Setter Property="Margin" Value="0,5,0,0"/>
+            <Setter Property="FormatString" Value="0.000e+0"/>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="0,5,0,0"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        <WindowsFormsHost>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        
+        <WindowsFormsHost Grid.Column="0">
             <otk:GLControl x:Name="GLMain" Load="OnLoad" Paint="OnRender"
                            MouseMove="OnMouseMove" MouseWheel="OnMouseScroll" MouseDown="OnMouseDown" MouseUp="OnMouseUp"/>
         </WindowsFormsHost>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <GroupBox Header="Configuration">
+                <StackPanel Orientation="Vertical">
+                    
+                    <TextBlock>Camera distance [m]:</TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Grid.Column="0" x:Name="SliderCamDist"
+                                Value="{Binding ElementName=_this, Path=CameraDistance}"
+                                Minimum="{Binding Source={x:Static local:MainWindow.MIN_CAM_DIST}}"
+                                Maximum="{Binding Source={x:Static local:MainWindow.MAX_CAM_DIST}}"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding ElementName=SliderCamDist, Path=Value}"
+                                           Minimum="{Binding Source={x:Static local:MainWindow.MIN_CAM_DIST}}"
+                                           Maximum="{Binding Source={x:Static local:MainWindow.MAX_CAM_DIST}}"
+                                           Increment="1e10"/>
+                    </Grid>
+
+                    <TextBlock>Mass [m]:</TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Grid.Column="0" x:Name="SliderM"
+                                Value="{Binding ElementName=_this, Path=M}"
+                                Minimum="{Binding Source={x:Static local:MainWindow.MIN_M}}"
+                                Maximum="{Binding Source={x:Static local:MainWindow.MAX_M}}"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding ElementName=SliderM, Path=Value}"
+                                           Minimum="{Binding Source={x:Static local:MainWindow.MIN_M}}"
+                                           Maximum="{Binding Source={x:Static local:MainWindow.MAX_M}}"
+                                           Increment="1e8"/>
+                    </Grid>
+                    <!--<TextBlock Text="{Binding ElementName=_this, Path=Mass, StringFormat={}Mass [kg]: {0:0.000e+0}}"/>-->
+
+                    <TextBlock>Mass [kg]:</TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Grid.Column="0" x:Name="SliderMass"
+                                Value="{Binding ElementName=_this, Path=Mass}"
+                                Minimum="{Binding Source={x:Static local:MainWindow.MIN_MASS}}"
+                                Maximum="{Binding Source={x:Static local:MainWindow.MAX_MASS}}"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding ElementName=SliderMass, Path=Value}"
+                                           Minimum="{Binding Source={x:Static local:MainWindow.MIN_MASS}}"
+                                           Maximum="{Binding Source={x:Static local:MainWindow.MAX_MASS}}"
+                                           Increment="1e35"/>
+                    </Grid>
+
+                    <TextBlock>Skybox:</TextBlock>
+                    <ComboBox x:Name="ComboSkybox" SelectedIndex="1" SelectionChanged="OnSkyboxSelectionChaged">
+                        <ComboBoxItem Content="Colors"/>
+                        <ComboBoxItem Content="Milky Way 1"/>
+                        <ComboBoxItem Content="Milky Way 2"/>
+                    </ComboBox>
+
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
     </Grid>
 </Window>

@@ -8,11 +8,11 @@ const float eps = 1e-6;
 uniform samplerCube cubeMap;
 uniform float M;
 uniform float dist;
+uniform vec3 camPos;
 
 layout (location = 0) out vec4 oColor;
 
 varying vec3 rayDirection;
-varying vec3 camPos;
 
 float g(float a, float w)
 {
@@ -60,11 +60,10 @@ void main()
         discard;
 
     float w1 = getW1(a);
-    //float angle = 2 * w1 * (f(a, 0) + f(a, w1)) / 2 - pi;
-    float angle = 0;
-    for (int k = 1; k <= intervals; k++)
+    float angle = f(a, 0) / 2;
+    for (int k = 1; k < intervals; k++)
     {
-        angle += f(a, k * w1 / (2 * intervals)); // TODO: check...
+        angle += f(a, k * w1 / intervals);
     }
     angle = 2 * angle * w1 / intervals - pi;
     float sinAngle = sin(-angle), cosAngle = cos(-angle);

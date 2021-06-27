@@ -4,12 +4,13 @@ namespace BlackHole
 {
     public class Quad : PositionTransform
     {
+        private const float NEAR = 1.0f;
         private Vector3[] _vertices =
         {
-            new Vector3(-1.0f, -1.0f, +1.0f),
-            new Vector3(+1.0f, -1.0f, +1.0f),
-            new Vector3(+1.0f, +1.0f, +1.0f),
-            new Vector3(-1.0f, +1.0f, +1.0f)
+            new Vector3(-1.0f, -1.0f, NEAR),
+            new Vector3(+1.0f, -1.0f, NEAR),
+            new Vector3(+1.0f, +1.0f, NEAR),
+            new Vector3(-1.0f, +1.0f, NEAR)
         };
         protected override Vector3[] vertices => _vertices;
 

@@ -36,6 +36,12 @@ namespace BlackHole
             GL.UniformMatrix4(location, false, ref matrix);
         }
 
+        public void BindVector3(Vector3 vector, string name)
+        {
+            int location = GL.GetUniformLocation(program, name);
+            GL.Uniform3(location, vector);
+        }
+
         public void BindVector4(Vector4 vector, string name)
         {
             int location = GL.GetUniformLocation(program, name);
