@@ -14,10 +14,11 @@ namespace BlackHole
         private const string TEXTURE_COLORS = TEXTURE_PATH_PREFIX + "Colors/";
         private const string TEXTURE_MILKYWAY1 = TEXTURE_PATH_PREFIX + "MilkyWay1/";
         private const string TEXTURE_MILKYWAY2 = TEXTURE_PATH_PREFIX + "MilkyWay2/";
+        private const string TEXTURE_FOREST = TEXTURE_PATH_PREFIX + "Forest/";
         // tex names: 0 - px, 1 - nx, 2 - py, 3 - ny, 4 - pz, 5 - nz
 
         private Shader shader;
-        private CubeMap cubeColors, cubeMilkyWay1, cubeMilkyWay2;
+        private CubeMap cubeColors, cubeMilkyWay1, cubeMilkyWay2, cubeForest;
         public Camera Camera { get; }
 
         public RenderManager(Camera camera)
@@ -36,6 +37,7 @@ namespace BlackHole
             cubeColors = new CubeMap(TEXTURE_COLORS);
             cubeMilkyWay1 = new CubeMap(TEXTURE_MILKYWAY1);
             cubeMilkyWay2 = new CubeMap(TEXTURE_MILKYWAY2);
+            cubeForest = new CubeMap(TEXTURE_FOREST);
         }
 
         public void SetupRender(int width, int height)
@@ -66,6 +68,13 @@ namespace BlackHole
         public void UseCubeMilkyWay2()
         {
             cubeMilkyWay2.Use();
+            GL.Enable(EnableCap.TextureCubeMapSeamless);
+            shader.BindInt(0, "cubeMap");
+        }
+
+        public void UseCubeForest()
+        {
+            cubeForest.Use();
             GL.Enable(EnableCap.TextureCubeMapSeamless);
             shader.BindInt(0, "cubeMap");
         }

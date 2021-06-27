@@ -14,7 +14,7 @@ namespace BlackHole
 
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        const int SKYBOX_MILKYWAY1 = 1, SKYBOX_MILKYWAY2 = 2;
+        const int SKYBOX_MILKYWAY1 = 1, SKYBOX_MILKYWAY2 = 2, SKYBOX_FOREST = 3;
         const float ZOOM_SPEED = 1e8f;
         const double MASS_MULT = 0.742e-27;
 
@@ -108,6 +108,9 @@ namespace BlackHole
                         break;
                     case SKYBOX_MILKYWAY2:
                         renderManager.UseCubeMilkyWay2();
+                        break;
+                    case SKYBOX_FOREST:
+                        renderManager.UseCubeForest();
                         break;
                     default:
                         renderManager.UseCubeColors();
