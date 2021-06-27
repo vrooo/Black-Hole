@@ -66,7 +66,7 @@ void main()
     {
         angle += f(a, k * w1 / (2 * intervals)); // TODO: check...
     }
-    angle = 2 * angle * w1 / intervals;
+    angle = 2 * angle * w1 / intervals - pi;
     float sinAngle = sin(-angle), cosAngle = cos(-angle);
     vec3 axis = normalize(cross(camPos, rayDirection));
     vec3 newRayDir = rayDirection * cosAngle + cross(axis, rayDirection) * sinAngle + axis * dot(axis, rayDirection) * (1.0f - cosAngle); // Rodrigues
