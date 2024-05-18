@@ -54,7 +54,9 @@ float getW1(float a)
 void main()
 {
     vec3 toHole = vec3(0.0f, 0.0f, dist);
-    float b = length(cross(camPos, rayDirection)) / length(rayDirection);
+    vec3 crossCamRay = cross(camPos, rayDirection);
+    float lenCrossCamRay = length(crossCamRay);
+    float b = lenCrossCamRay / length(rayDirection);
     float a = 2 * M / b;
     if (a >= 2 / (3*sqrt3))
         discard;
@@ -67,7 +69,7 @@ void main()
     }
     angle = 2 * angle * w1 / intervals - pi;
     float sinAngle = sin(-angle), cosAngle = cos(-angle);
-    vec3 axis = normalize(cross(camPos, rayDirection));
+    vec3 axis = crossCamRay / lenCrossCamRay;
     vec3 newRayDir = rayDirection * cosAngle + cross(axis, rayDirection) * sinAngle + axis * dot(axis, rayDirection) * (1.0f - cosAngle); // Rodrigues
 
     oColor = texture(cubeMap, newRayDir);

@@ -9,6 +9,5 @@ varying vec3 rayDirection;
 void main()
 {
     rayDirection = (invViewMatrix * vec4(position.x * aspectRatio, position.y, position.z, 0.0f)).xyz;
-    //camPos = invViewMatrix[3].xyz;
     gl_Position = vec4(position, 1.0f);
 }
